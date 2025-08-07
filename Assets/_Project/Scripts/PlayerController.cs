@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Cinemachine;
 using KBCore.Refs;
 using UnityEngine;
 using Utilities;
+using Unity.Cinemachine;
 
 namespace Platformer {
     public class PlayerController : ValidatedMonoBehaviour {

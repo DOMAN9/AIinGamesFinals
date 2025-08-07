@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Platformer {
+namespace Platformer{
     public class Health : MonoBehaviour {
         [SerializeField] int maxHealth = 100;
         [SerializeField] FloatEventChannel playerHealthChannel;
