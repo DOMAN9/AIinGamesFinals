@@ -1,19 +1,21 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 namespace Platformer
 {
     public class HealthBar : MonoBehaviour
     {
-        [SerializeField] private UnityEngine.UI.Image _healthBarSprite;
+        [SerializeField] private Image _healthBarSprite;
         [SerializeField] private float reduceSpeed = 2f;
         private Camera cam;
-        private float target;
+        private float targetFill;
 
         private void Start()
         {
             cam = Camera.main;
+            targetFill = _healthBarSprite.fillAmount;
         }
 
         public void UpdateHealthBar(float maxHealth, float currentHealth)
@@ -25,15 +27,20 @@ namespace Platformer
             }
 
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-            Debug.Log($"Max Health: {maxHealth}, Current Health: {currentHealth}");
+            targetFill = currentHealth / maxHealth;
 
-            _healthBarSprite.fillAmount = currentHealth / maxHealth;
+            Debug.Log($"Health Bar Updated → {currentHealth}/{maxHealth}");
         }
 
         private void Update()
         {
             transform.rotation = Quaternion.LookRotation(transform.position - cam.transform.position);
-            _ = _healthBarSprite.fillAmount - Mathf.MoveTowards(_healthBarSprite.fillAmount, target, reduceSpeed * Time.deltaTime);
+
+            _healthBarSprite.fillAmount = Mathf.MoveTowards(
+                _healthBarSprite.fillAmount,
+                targetFill,
+                reduceSpeed * Time.deltaTime
+            );
         }
     }
 }

@@ -2,36 +2,43 @@
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-namespace Platformer{
-    public class Health : MonoBehaviour {
+namespace Platformer
+{
+    public class Health : MonoBehaviour
+    {
         [SerializeField] int maxHealth = 100;
         [SerializeField] FloatEventChannel playerHealthChannel;
 
         int currentHealth;
 
         [SerializeField] private HealthBar healthBar;
-        
+
         public bool IsDead => currentHealth <= 0;
-        
-        void Awake() {
+
+        void Awake()
+        {
             currentHealth = maxHealth;
         }
 
-        void Start() {
+        void Start()
+        {
             PublishHealthPercentage();
 
             healthBar.UpdateHealthBar(maxHealth, currentHealth);
 
         }
-        
-        public void TakeDamage(int damage) {
-            currentHealth -= damage;
+
+        public void TakeDamage(int damage)
+        {
             PublishHealthPercentage();
+            currentHealth -= damage;
+            
         }
 
-        void PublishHealthPercentage() {
+        void PublishHealthPercentage()
+        {
             if (playerHealthChannel != null)
-                playerHealthChannel.Invoke(currentHealth / (float) maxHealth);
+                playerHealthChannel.Invoke(currentHealth / (float)maxHealth);
 
             healthBar.UpdateHealthBar(maxHealth, currentHealth);
         }

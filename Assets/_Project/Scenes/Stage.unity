@@ -812,6 +812,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0c16f0ea935ea64297ca1d4d55d9746, type: 3}
+--- !u!1 &245715978 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3507969105433848503, guid: ee5e07c1b098cfb4c8b64579474196d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1789227699295514208}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &246076984
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1328,6 +1334,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 478215843}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &318416885 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5161822160460304954, guid: 5a8864289a994ec49b15901bb0e58c8e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4903302878667295738}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &323448573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,6 +1454,23 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1789227699295514208}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &325913395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245715978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587790c3d99f31d429d9db55868971fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 4903302878667295739}
+  followRange: 10
+  attackRange: 2
+  damage: 10
+  attackCooldown: 1
 --- !u!1001 &345710851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7015,7 +7044,7 @@ GameObject:
   - component: {fileID: 1191436165}
   - component: {fileID: 1191436169}
   m_Layer: 5
-  m_Name: HealthBar Canvas
+  m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11312,10 +11341,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 81bfeb36973bb42469d0cfdf068f23f5, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -12762,6 +12791,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3507969105433848503, guid: ee5e07c1b098cfb4c8b64579474196d8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 8898516834573522016, guid: ee5e07c1b098cfb4c8b64579474196d8,
         type: 3}
       propertyPath: m_Avatar
@@ -12775,7 +12809,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3507969105433848503, guid: ee5e07c1b098cfb4c8b64579474196d8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 325913395}
   m_SourcePrefab: {fileID: 100100000, guid: ee5e07c1b098cfb4c8b64579474196d8, type: 3}
 --- !u!1001 &4903302878667295738
 PrefabInstance:
@@ -12882,7 +12920,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 428252245}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5161822160460304954, guid: 5a8864289a994ec49b15901bb0e58c8e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4903302878667295751}
   m_SourcePrefab: {fileID: 100100000, guid: 5a8864289a994ec49b15901bb0e58c8e, type: 3}
 --- !u!4 &4903302878667295739 stripped
 Transform:
@@ -12896,12 +12938,28 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 4903302878667295738}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 318416885}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0de82d6e6e34dd2970b3cb12bc5419a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4903302878667295751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318416885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51155aae1134e25479e5e0194633bab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  playerHealthChannel: {fileID: 11400000, guid: 947d1eae0c2abe848be702c13936e7ef,
+    type: 2}
+  healthBar: {fileID: 1191436169}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
