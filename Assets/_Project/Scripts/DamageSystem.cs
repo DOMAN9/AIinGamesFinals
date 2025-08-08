@@ -1,9 +1,11 @@
 using Platformer;
 using UnityEngine;
+using System;
 using UnityEngine.AI; // For NavMesh following
 
 public class EnemyAI : MonoBehaviour
 {
+    ////////////////ENEMY BEHAVIOUR////////////////////
     public Transform player;          // Player to follow
     public float followRange = 10f;   // How far enemy can detect the player
     public float attackRange = 2f;    // Distance to start attack
@@ -13,25 +15,82 @@ public class EnemyAI : MonoBehaviour
     private NavMeshAgent agent;
     private float lastAttackTime;
 
+    //////////////////ENEMY STATES//////////////////
+    public enum Enemystate
+    {
+        Idle,
+        Chasing,
+        Attacking
+    }
+    public Enemystate currentState;
+
+    // Animator for enemy animations
+    private Animator animator;
+
+    ///////////////////////////////////////////////////// 
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>(); // Get the Animator component
+        currentState = Enemystate.Idle;
     }
 
     void Update()
     {
         float distance = Vector3.Distance(transform.position, player.position);
 
-        // Detection & Follow
-        if (distance <= followRange && distance > attackRange)
+        // Handle state transitions
+        switch (currentState)
         {
-            agent.isStopped = false;
-            agent.SetDestination(player.position);
+            case Enemystate.Idle:
+                IdleState(distance);
+                break;
+
+            case Enemystate.Chasing:
+                ChasingState(distance);
+                break;
+
+            case Enemystate.Attacking:
+                AttackingState(distance);
+                break;
         }
-        else if (distance <= attackRange)
+
+        // Animator state handling based on FSM
+        HandleAnimations();
+    }
+
+    void IdleState(float distance)
+    {
+        if (distance <= followRange)
         {
-            agent.isStopped = true;
-            Attack();
+            currentState = Enemystate.Chasing;
+        }
+    }
+
+    void ChasingState(float distance)
+    {
+        agent.isStopped = false;
+        agent.SetDestination(player.position);
+
+        if (distance <= attackRange)
+        {
+            currentState = Enemystate.Attacking;
+        }
+        else if (distance > followRange)
+        {
+            currentState = Enemystate.Idle;
+        }
+    }
+
+    void AttackingState(float distance)
+    {
+        agent.isStopped = true;
+        Attack();
+
+        if (distance > attackRange)
+        {
+            currentState = Enemystate.Chasing;
         }
     }
 
@@ -55,6 +114,30 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    void HandleAnimations()
+    {
+        // Set animator parameters based on FSM states
+        switch (currentState)
+        {
+            case Enemystate.Idle:
+                animator.SetBool("IsIdle", true);
+                animator.SetBool("IsChasing", false);
+                animator.SetBool("IsAttacking", false);
+                break;
+
+            case Enemystate.Chasing:
+                animator.SetBool("IsIdle", false);
+                animator.SetBool("IsChasing", true);
+                animator.SetBool("IsAttacking", false);
+                break;
+
+            case Enemystate.Attacking:
+                animator.SetBool("IsIdle", false);
+                animator.SetBool("IsChasing", false);
+                animator.SetBool("IsAttacking", true);
+                break;
+        }
+    }
 
     void OnDrawGizmosSelected()
     {

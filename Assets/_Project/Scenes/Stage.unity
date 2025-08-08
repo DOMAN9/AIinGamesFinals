@@ -1471,6 +1471,7 @@ MonoBehaviour:
   attackRange: 2
   damage: 10
   attackCooldown: 1
+  currentState: 0
 --- !u!1001 &345710851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12704,7 +12705,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 00565a461d0b211439687adae533dd31, type: 2}
+      objectReference: {fileID: 9100000, guid: bb56728492046f84097a4dff8ba448b6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
