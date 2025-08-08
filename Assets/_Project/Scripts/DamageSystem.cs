@@ -1,16 +1,16 @@
 using Platformer;
 using UnityEngine;
 using System;
-using UnityEngine.AI; // For NavMesh following
+using UnityEngine.AI; 
 
 public class EnemyAI : MonoBehaviour
 {
     ////////////////ENEMY BEHAVIOUR////////////////////
-    public Transform player;          // Player to follow
-    public float followRange = 10f;   // How far enemy can detect the player
-    public float attackRange = 2f;    // Distance to start attack
-    public int damage = 10;           // Damage amount
-    public float attackCooldown = 1f; // Time between attacks
+    public Transform player;         
+    public float followRange = 10f;   
+    public float attackRange = 2f;   
+    public int damage = 10;           
+    public float attackCooldown = 1f; 
 
     private NavMeshAgent agent;
     private float lastAttackTime;
@@ -24,7 +24,7 @@ public class EnemyAI : MonoBehaviour
     }
     public Enemystate currentState;
 
-    // Animator for enemy animations
+    
     private Animator animator;
 
     ///////////////////////////////////////////////////// 
@@ -32,7 +32,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>(); // Get the Animator component
+        animator = GetComponent<Animator>();
         currentState = Enemystate.Idle;
     }
 
@@ -40,7 +40,7 @@ public class EnemyAI : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, player.position);
 
-        // Handle state transitions
+        /////STATE TRANSITIONA/////////////////////////////////////////////////////////////
         switch (currentState)
         {
             case Enemystate.Idle:
@@ -55,8 +55,6 @@ public class EnemyAI : MonoBehaviour
                 AttackingState(distance);
                 break;
         }
-
-        // Animator state handling based on FSM
         HandleAnimations();
     }
 
@@ -116,7 +114,7 @@ public class EnemyAI : MonoBehaviour
 
     void HandleAnimations()
     {
-        // Set animator parameters based on FSM states
+        ///////ANIMATION PARAMETERZZZZ/////////////////////////////////
         switch (currentState)
         {
             case Enemystate.Idle:
@@ -141,7 +139,7 @@ public class EnemyAI : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        // Debug ranges in Scene view
+        ////////EASIER VIEWING OF RANGEZ////////////////////////////////
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, followRange);
         Gizmos.color = Color.red;

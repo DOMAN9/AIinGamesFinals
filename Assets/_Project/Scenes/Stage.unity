@@ -1468,9 +1468,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 4903302878667295739}
   followRange: 10
-  attackRange: 2
+  attackRange: 3
   damage: 10
-  attackCooldown: 1
+  attackCooldown: 3
   currentState: 0
 --- !u!1001 &345710851
 PrefabInstance:
