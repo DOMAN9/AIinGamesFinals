@@ -1467,8 +1467,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4903302878667295739}
-  followRange: 10
-  attackRange: 3
+  followRange: 6
+  attackRange: 2
   damage: 10
   attackCooldown: 3
   currentState: 0

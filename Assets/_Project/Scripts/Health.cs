@@ -15,6 +15,10 @@ namespace Platformer
 
         public bool IsDead => currentHealth <= 0;
 
+        // 🔹 Added public getters for UI access
+        public int CurrentHealth => currentHealth;
+        public int MaxHealth => maxHealth;
+
         void Awake()
         {
             currentHealth = maxHealth;
@@ -23,16 +27,15 @@ namespace Platformer
         void Start()
         {
             PublishHealthPercentage();
-
             healthBar.UpdateHealthBar(maxHealth, currentHealth);
-
         }
 
         public void TakeDamage(int damage)
         {
-            PublishHealthPercentage();
+            // 🔹 Subtract before updating UI
             currentHealth -= damage;
-            
+            currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+            PublishHealthPercentage();
         }
 
         void PublishHealthPercentage()
